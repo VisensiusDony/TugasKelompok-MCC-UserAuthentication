@@ -16,6 +16,7 @@ namespace UserOop
             foreach (var element in user)
             {
                 Console.WriteLine("=========================================");
+                Console.WriteLine("=========================================");
                 Console.WriteLine($"Nama:{element.FirstName} {element.LastName}");
                 Console.WriteLine($"Username:{ element.UserName }");
                 Console.WriteLine($"Password:{element.Password}");
