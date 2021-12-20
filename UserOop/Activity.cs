@@ -26,22 +26,22 @@ namespace UserOop
         public void Login()
         {
             Activity a = new Activity();
-            Console.Write("Masukkan Username: ");
+            Console.Write("Enter your Username: ");
             var username = Console.ReadLine();
-            Console.Write("Masukkan Password: ");
+            Console.Write("Enter your Password: ");
             var password = Console.ReadLine();
-            var userN = user.Exists(x => x.UserName == username);
-            var pass = user.Exists(x => BCrypt.Net.BCrypt.Verify(password, x.Password));
+            var isUsername = user.Exists(x => x.UserName == username);
+            var isPassword = user.Exists(x => BCrypt.Net.BCrypt.Verify(password, x.Password));
 
-                if ( userN==true && pass==true)
+                if (isUsername && isPassword)
                 {
                 
-                Console.WriteLine("Login Berhasil");
+                Console.WriteLine("Login Successfull");
                 }
                 else
                 {
                 
-                Console.WriteLine("Login Gagal");
+                Console.WriteLine("Login Failed");
                 }
         }
         public void SearchUser(string nama)
@@ -49,10 +49,10 @@ namespace UserOop
             ///variabel penampung awal (saat delete user akan bug)
             //var cari = false;
             //var index = user.Exists(user => user.FirstName == nama);
-                var validate= user.Exists(user => user.FirstName.Contains(nama)|| user.LastName.Contains(nama));
-                if (validate == true && user.Count>0)
+                var isValidate= user.Exists(user => user.FirstName.Contains(nama)|| user.LastName.Contains(nama));
+                if (isValidate && user.Count>0)
                 {
-                    Console.WriteLine("data ditemukan");
+                    Console.WriteLine("data found");
                     var foundUser = user.FindAll(x => x.FirstName.Contains(nama)|| x.LastName.Contains(nama));
                     foreach (User u in foundUser)
                     {
@@ -66,7 +66,7 @@ namespace UserOop
                 }
                 else
                 {
-                    Console.WriteLine("data tidak ditemukan");
+                    Console.WriteLine("data not found");
                     Console.ReadKey();
                 }
         }
@@ -74,56 +74,56 @@ namespace UserOop
         {
                 this.user.Add(user);
                 Console.WriteLine("==============================");
-                Console.WriteLine("Sukses Menambahkan");
+                Console.WriteLine("Create user successfull");
                 Console.WriteLine("==============================");
         }
             
         public void EditUser(string username)
         {
-            var validate = user.Exists(user => user.UserName==username);
-            if (validate == true && user.Count > 0)
+            var isUsername = user.Exists(user => user.UserName==username);
+            if (isUsername && user.Count > 0)
             {
-                Console.WriteLine("data ditemukan");
+                Console.WriteLine("data found");
                 var foundUser = user.FindAll(x => x.UserName==username);
                 foreach (User u in foundUser)
                 {
                     Console.WriteLine("=========================================");
-                    Console.Write("Edit Nama Depan ");
+                    Console.Write("Edit First Name ");
                     u.FirstName = Console.ReadLine();
-                    Console.Write("Edit Nama Belakang ");
+                    Console.Write("Edit Last Name ");
                     u.LastName = Console.ReadLine();
-                    Console.Write("Edit Nama Password ");
+                    Console.Write("Edit Password ");
                     u.Password = Console.ReadLine();
                     u.Password = BCrypt.Net.BCrypt.HashPassword(u.Password);
                     Console.WriteLine("=========================================");
-                    Console.WriteLine("Edit profil sukses!");
+                    Console.WriteLine("Edit profile success!");
                     Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("data tidak ditemukan");
+                Console.WriteLine("data not found");
                 Console.ReadKey();
             }
         }
         public void DeleteUser()
         {
             ///Hapus user dengan index
-            /*try
+            try
             {
                 int index;
-                Console.WriteLine("Masukkan index data yang dihapus ");
+                Console.WriteLine("Input data index ");
                 index = int.Parse(Console.ReadLine());
                 user.RemoveAt(index - 1);
                 Console.WriteLine("==============================");
-                Console.WriteLine("Data Sukses Terhapus");
+                Console.WriteLine("Delete data successfull");
                 Console.WriteLine("==============================");
             }
             catch (Exception)
             {
-                Console.WriteLine("Data kosong!");
-            }*/
-            try
+                Console.WriteLine("Data empty!");
+            }
+            /*try
             {
                 Console.Write("Silahkan Masukkan data yang ingin di hapus :");
                 //int hapus = Convert.ToInt32(Console.ReadLine());
@@ -141,10 +141,10 @@ namespace UserOop
                         Console.WriteLine("data berhasil dihapus");
                         user.Remove(item);
                     }
-                    /*foreach (string ite in valNameFirst)
+                    *//*foreach (string ite in valNameFirst)
                     {
                         name.Remove(ite);
-                    }*/
+                    }*//*
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace UserOop
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }
+            }*/
         }
 
     }

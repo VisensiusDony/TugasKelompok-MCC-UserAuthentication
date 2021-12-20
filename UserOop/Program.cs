@@ -11,7 +11,7 @@ namespace UserOop
         static void MenuChoice()
         {
             Activity a = new Activity();
-            bool repeat = false;
+            bool isLoop = false;
             int menu;
             do
             {
@@ -21,10 +21,10 @@ namespace UserOop
                     Console.WriteLine("2.Show User");
                     Console.WriteLine("3.Search User");
                     Console.WriteLine("4.Login User");
-                    Console.WriteLine("5.Hapus Data User");
-                    Console.WriteLine("6.Edit Data User");
+                    Console.WriteLine("5.Delete User Data");
+                    Console.WriteLine("6.Edit User Data");
                     Console.WriteLine("7.Exit");
-                    Console.Write("Masukkan Menu pilihan: ");
+                    Console.Write("Enter your menu (1-7): ");
                     menu = int.Parse(Console.ReadLine());
                     switch (menu)
                     {
@@ -45,44 +45,44 @@ namespace UserOop
                                     AnyKey();
                                 }
                             }
-                            repeat = true;
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 2:
                             Console.Clear();
                             Console.WriteLine("=====Show User========");
                             a.ShowUser();
-                            repeat = true;
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 3:
                             Console.Clear();
-                            bool loop = false;
+                            bool isLoopInner = false;
                             do
                             {
                                     if (a.user.Count > 0)
                                     {
                                         Console.WriteLine("=====Search User========");
-                                        Console.Write("Masukkan pencarian ");
+                                        Console.Write("Input search keyword ");
                                         string nama = Console.ReadLine();
                                         a.SearchUser(nama);
-                                        loop = false;
+                                    isLoopInner = false;
                                     }
                                     else
                                     {
-                                        Console.WriteLine("data kosong");
-                                        loop = false;
+                                        Console.WriteLine("Data not found");
+                                    isLoopInner = false;
                                     }
                                 
-                            } while (loop == true);
-                            repeat = true;
+                            } while (isLoopInner == true);
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 4:
                             Console.Clear();
                             Console.WriteLine("=====Login User========");
                             a.Login();
-                            repeat = true;
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 5:
@@ -94,10 +94,10 @@ namespace UserOop
                             }
                             else
                             {
-                                Console.WriteLine("data kosong");
-                                loop = false;
+                                Console.WriteLine("Data not found");
+                                isLoopInner = false;
                             }
-                            repeat = true;
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 6:
@@ -106,36 +106,36 @@ namespace UserOop
                             if (a.user.Count > 0)
                             {
                                 Console.WriteLine("=====Edit User========");
-                            Console.Write("Masukkan username yang ingin diedit ");
+                            Console.Write("Enter username ");
                             userEdit = Console.ReadLine();
                             a.EditUser(userEdit);
                             }
                             else
                             {
-                                Console.WriteLine("data kosong");
-                                loop = false;
+                                Console.WriteLine("Data not found");
+                                isLoopInner = false;
                             }
-                            repeat = true;
+                            isLoop = true;
                             AnyKey();
                             break;
                         case 7:
-                            repeat = false;
+                            isLoop = false;
                             break;
                         default:
-                            Console.WriteLine("Menu tidak ditemukan!");
-                            repeat = true;
+                            Console.WriteLine("Menu not found!");
+                            isLoop = true;
                             AnyKey();
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Menu harus angka!");
+                    Console.WriteLine("Menu shoulb be number!");
                     AnyKey();
-                    repeat = true;
+                    isLoop = true;
                 }
                 
-            } while (repeat==true);
+            } while (isLoop == true);
 
             
             static void AnyKey()

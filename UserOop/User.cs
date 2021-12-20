@@ -14,35 +14,36 @@ namespace UserOop
         public User(Activity a)
         {
             
-            bool loop = true;
-            Console.Write("Masukkan FirstName: ");
+            bool isLoop = true;
+            Console.Write("Enter FirstName: ");
             this.FirstName = Console.ReadLine();
-            Console.Write("Masukkan LastName: ");
+            Console.Write("Enter LastName: ");
             this.LastName = Console.ReadLine();
-            Console.Write("Masukkan Password: ");
+            Console.Write("Enter Password: ");
             this.Password = Console.ReadLine();
             this.Password = BCrypt.Net.BCrypt.HashPassword(Password);
-            var userN = a.user.Exists(x => x.UserName == UserName);
+            this.UserName = $"{FirstName.Substring(0, 2)}{LastName.Substring(0, 2)}";
+            
             //var userB = a.user.Exists(y => y.LastName == LastName);
             /*var userF = a.name.Exists(x=>x==FirstName);
             var userL = a.nameLast.Exists(x => x == LastName);
             a.name.Add(FirstName);
             a.nameLast.Add(LastName);*/
-            while (loop)
+            while (isLoop)
             {
-                if (userN)
+                var isUsername = a.user.Exists(x => x.UserName == UserName);
+                if (isUsername==true)
                 {
                     Random random = new Random();
                     double flt = random.NextDouble();
                     int shift = Convert.ToInt32(Math.Floor(25 * flt));
                     string letter = Convert.ToString(shift + 65);
-                    UserName = $"{FirstName.Substring(0, 2)}{LastName.Substring(0, 2)}{letter}";
-                    loop = false;
+                    this.UserName = $"{FirstName.Substring(0, 2)}{LastName.Substring(0, 2)}{letter}";
+                    isLoop = false;
                 }
                 else
                 {
-                    UserName = $"{FirstName.Substring(0, 2)}{LastName.Substring(0, 2)}";
-                    loop = false;
+                    isLoop = false;
                 }
             }
         }
